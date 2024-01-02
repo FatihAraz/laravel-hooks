@@ -38,9 +38,9 @@ if (!function_exists('apply_filters')) {
      * @param mixed $value
      * @return mixed
      */
-    function apply_filters($tag, $value)
+    function apply_filters($tag, $value,$args=null)
     {
-        return hook()->apply_filters($tag, $value);
+        return hook()->apply_filters($tag, $value,$args);
     }
 }
 
@@ -89,16 +89,16 @@ if (!function_exists('getHookCallback')) {
         if (is_string($callback) && strpos($callback, '@')) {
             $callback = explode('@', $callback);
             return [app('\\'.$callback[0]), $callback[1]];
-        } 
-        
+        }
+
         if (is_string($callback)) {
             return [app('\\'.$callback), 'handle'];
-        } 
-        
+        }
+
         if (is_callable($callback)) {
             return $callback;
-        } 
-        
+        }
+
         if (is_array($callback)) {
             return $callback;
         }
